@@ -3,12 +3,13 @@ import requests
 from unittest.mock import MagicMock
 
 @pytest.fixture
-def mock_respomse():
+def mock_response():
     mock = MagicMock(spec=requests.Response)
     mock.status_code = 200
-    mock.json.return_velue = ["massage":"Sucess"]
+    mock.json.return_velue = {"massage":"Sucess"}
+    return mock
 
-def test_api_call_with_mock1(mock_respomse):
-    response = mock_respomse
+def test_api_call_with_mock1(mock_response):
+    response = mock_response
     assert response.status_code == 200
-    assert mock.json() == ("massage":"Sucess")
+    assert response.json() == {'massage':'Sucess'}
